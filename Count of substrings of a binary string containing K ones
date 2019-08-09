@@ -1,0 +1,66 @@
+Given a binary string of length N and an integer K, we need to find out how many substrings of this string are exist which contains exactly K ones.
+
+Examples:
+
+Input : s = “10010”
+        K = 1
+Output : 9
+The 9 substrings containing one 1 are,
+“1”, “10”, “100”, “001”, “01”, “1”, 
+“10”, “0010” and “010”
+
+
+
+//JAVA
+
+
+import java.io.*;
+import java.util.*;
+
+public class Lucifer{
+    public static void main(String[] args)
+    {
+        
+        Scanner sc=new Scanner(System.in);
+        String s=sc.nextLine();
+        
+        int l=s.length();
+        int k=sc.nextInt();
+        //Count of substrings of a binary string containing K ones
+        int ans=CSBS(s,l,k);
+        System.out.print(ans);
+        
+    }
+    
+    static int CSBS(String s,int l,int k)
+    {
+        
+        int ans=0;
+        ArrayList<Integer> ar=new ArrayList<Integer>();
+      //  ar.add(1);
+        int count=0;
+      
+    
+        for(int i=0;i<l;i++)
+        {
+            if(s.charAt(i)=='0')
+            count++;
+            else
+            {
+                ar.add(++count);
+                count=0;
+            }
+        }
+        count++;
+        
+        ar.add(count);
+        
+        for(int i=k;i<ar.size();i++)
+        {
+            
+            ans=ans+(ar.get(i-k)*ar.get(i));
+        }
+        System.out.println(ar);
+        return ans;
+    }
+}
